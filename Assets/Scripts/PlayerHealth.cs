@@ -34,7 +34,14 @@ public class PlayerHealth : MonoBehaviour
     {
         valueRectTransform.anchorMax = new Vector2(value / _maxValue, 1);
     }
-    private void PlayerIsDead()
+
+    public void AddHealth(float amount)
+    {
+        value += amount;
+        value = Mathf.Clamp(value, 0, _maxValue);
+        DrawHealthBar();
+    }
+        private void PlayerIsDead()
     {
         gameplayUI.SetActive(false);
         gameOverScreen.SetActive(true);
