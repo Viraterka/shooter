@@ -13,14 +13,30 @@ public class GrenadeCaster : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    public float clickDelay = 2f; // Задержка между кликами
+    private bool canClick = true;
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && canClick) 
         {
-            var grenade = Instantiate(grenadePrefab);
-            grenade.transform.position = grenadeSourceTransform.position;
-            grenade.GetComponent<Rigidbody>().AddForce(grenadeSourceTransform.forward * force);
+            StartCoroutine(ClickDelay());
+            if (Input.GetMouseButtonDown(1))
+            {
+                var grenade = Instantiate(grenadePrefab);
+                grenade.transform.position = grenadeSourceTransform.position;
+                grenade.GetComponent<Rigidbody>().AddForce(grenadeSourceTransform.forward * force);
+            }
         }
     }
+
+    IEnumerator ClickDelay()
+    {
+        canClick = false;
+        yield return new WaitForSeconds(clickDelay);
+        canClick = true;
+    }
 }
+
+    
+

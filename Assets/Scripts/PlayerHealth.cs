@@ -6,9 +6,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public float value = 100;
     public RectTransform valueRectTransform;
+    public List<GameObject> Enemies;
 
     public GameObject gameplayUI;
     public GameObject gameOverScreen;
+    public GameObject gamewinscreen;
 
     private float _maxValue;
     public void DealDamage(float damage)
@@ -49,4 +51,9 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<FireballCaster>().enabled = false;
         GetComponent<CameraRotation>().enabled = false;
     }
+
+
+   
+    
+
 }

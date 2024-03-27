@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private bool _isPlayerNoticed;
     private PlayerHealth _playerHealth;
+    public float Direction = 10;
 
     void Start()
     {
@@ -38,7 +39,9 @@ public class EnemyAI : MonoBehaviour
     }
     private void NoticePlayerUpdate()
     {
+        
         var direction = player.transform.position - transform.position;
+        direction = Vector3.ClampMagnitude(direction, Direction);
         _isPlayerNoticed = false;
         if (Vector3.Angle(transform.forward, direction) < viewAngle)
         {
